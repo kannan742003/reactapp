@@ -16,8 +16,14 @@ COPY . .
 # Build the React app
 RUN npm run build
 
-# Expose the port that the app will run on (the default for create-react-app is 3000)
-EXPOSE 3000
+# Stage 2: Use a smaller image for production
+FROM nginx:alpine
 
-# Start the app
-CMD ["npm", "start"]
+# Copy the build output from the first stage to the NGINX public directory
+COPY --from=0 /usr/src/app/build /usr/share/nginx/html
+
+# Expose port 80 for NGINX
+EXPOSE 80
+
+# Command to start NGINX
+CMD ["nginx", "-g", "daemon off;"]
