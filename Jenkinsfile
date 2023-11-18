@@ -1,14 +1,16 @@
 pipeline {
     agent any
 
+    environment {
+        // Define NodeJS installation in Jenkins
+        NODEJS_HOME = tool 'NodeJS'
+        PATH = "${NODEJS_HOME}/bin:${env.PATH}"
+    }
+
     stages {
         stage('Build') {
             steps {
                 script {
-                    // Define NodeJS installation in Jenkins
-                    def nodejsInstallation = tool 'NodeJS'
-                    env.PATH = "${nodejsInstallation}/bin:${env.PATH}"
-
                     // Install project dependencies and build the React app
                     sh 'npm install'
                     sh 'npm run build'
@@ -19,8 +21,10 @@ pipeline {
         stage('Deploy') {
             steps {
                 // This is a simple example; you might deploy to a server or a cloud service
-                sh 'docker build -t my-react-app .'
-                sh 'docker run -p 8080:80 my-react-app'
+                script {
+                    sh 'docker build -t my-react-app .'
+                    sh 'docker run -p 8080:80 my-react-app'
+                }
             }
         }
     }
