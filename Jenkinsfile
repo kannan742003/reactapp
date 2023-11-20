@@ -27,7 +27,7 @@ pipeline {
             steps {
                 // Build and run the Docker image
                 bat 'docker build -t my-react-app .'
-                bat 'docker run -p 8080:80 my-react-app'
+                bat 'docker run -p 8000:80 my-react-app'
             }
         }
     }
