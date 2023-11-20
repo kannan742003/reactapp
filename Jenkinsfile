@@ -23,6 +23,15 @@ pipeline {
             }
         }
 
+        stage('Test') {
+            steps {
+                script {
+                    // Run tests
+                    bat 'npm test'
+                }
+            }
+        }
+
         stage('Deploy') {
             steps {
                 // Build and run the Docker image
