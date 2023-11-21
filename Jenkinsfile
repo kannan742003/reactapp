@@ -9,6 +9,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
+                // Checkout the source code
                 checkout scm
             }
         }
@@ -16,9 +17,11 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    // Install project dependencies and build the React app
-                    bat 'npm install'
-                    bat 'npm run build'
+                    // Install project dependencies
+                    sh 'npm install'
+
+                    // Build the React app
+                    sh 'npm run build'
                 }
             }
         }
@@ -27,16 +30,18 @@ pipeline {
             steps {
                 script {
                     // Run tests
-                    bat 'npm test'
+                    sh 'npm test'
                 }
             }
         }
 
         stage('Deploy') {
             steps {
-                // Build and run the Docker image
-                bat 'docker build -t my-react-app .'
-                bat 'docker run -p 8000:80 my-react-app'
+                script {
+                    // Build and run the Docker image
+                    sh 'docker build -t my-react-app .'
+                    sh 'docker run -p 8000:80 my-react-app'
+                }
             }
         }
     }
