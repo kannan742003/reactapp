@@ -18,10 +18,10 @@ pipeline {
             steps {
                 script {
                     // Install project dependencies
-                    sh 'npm install'
+                    bat 'npm install'
 
                     // Build the React app
-                    sh 'npm run build'
+                    bat 'npm run build'
                 }
             }
         }
@@ -30,7 +30,7 @@ pipeline {
             steps {
                 script {
                     // Run tests
-                    sh 'npm test'
+                    bat 'npm test'
                 }
             }
         }
@@ -39,8 +39,8 @@ pipeline {
             steps {
                 script {
                     // Build and run the Docker image
-                    sh 'docker build -t my-react-app .'
-                    sh 'docker run -p 8000:80 my-react-app'
+                    bat 'docker build -t my-react-app .'
+                    bat 'docker run -p 8001:80 my-react-app'
                 }
             }
         }
