@@ -13,7 +13,7 @@ const Greeting = ({ name }) => (
 function App() {
   return (
     <div className="App">
-      <h1>Hello, All! </h1>
+      <h1>Hello, EveryOne! </h1>
       <Greeting name="Abhyaz" />
     </div>
   );
