@@ -14,7 +14,7 @@ function App() {
   return (
     <div className="App">
       <h1>Hello, EveryOne! </h1>
-      <Greeting name="Abhyaz" />
+      <Greeting name="Abhyaz MTAB Technology" />
     </div>
   );
 }
